@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_clone/screens/home_screen.dart';
 import 'package:zoom_clone/screens/login_screen.dart';
 import 'package:zoom_clone/utils/colors.dart';
 import 'package:zoom_clone/utils/navigation.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,7 +24,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/login',
       routes: {
-        LoginScreen.rootName: (context) => const LoginScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
     );
   }

@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_clone/resources/auth_methods.dart';
+import 'package:zoom_clone/screens/home_screen.dart';
 import 'package:zoom_clone/utils/assets.dart';
+import 'package:zoom_clone/utils/navigation.dart';
 import 'package:zoom_clone/widgets/custom_button.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String rootName = '/login';
+class LoginScreen extends StatefulWidget {
+  static const String routeName = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  AuthMethods _authMethods = AuthMethods();
+
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +41,16 @@ class LoginScreen extends StatelessWidget {
             ),
 
             // button
-            CustomButton(label: 'Google Sign In', onTap: () {}),
+            CustomButton(
+                label: 'Google Sign In',
+                onTap: () async {
+                  bool res = await _authMethods.signInWithGoogle();
+                  if (res) {
+                    // goTo Home
+                    Navigation.pushNamedAndRemoveUntil(
+                        HomeScreen.routeName, (p0) => false);
+                  }
+                }),
           ],
         ),
       ),
