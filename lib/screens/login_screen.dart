@@ -5,16 +5,9 @@ import 'package:zoom_clone/utils/assets.dart';
 import 'package:zoom_clone/utils/navigation.dart';
 import 'package:zoom_clone/widgets/custom_button.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
   const LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  AuthMethods _authMethods = AuthMethods();
 
   //
   @override
@@ -44,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButton(
                 label: 'Google Sign In',
                 onTap: () async {
-                  bool res = await _authMethods.signInWithGoogle();
+                  bool res = await AuthMethods().signInWithGoogle();
                   if (res) {
                     // goTo Home
                     Navigation.pushNamedAndRemoveUntil(
